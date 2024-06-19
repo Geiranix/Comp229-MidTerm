@@ -1,33 +1,64 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .App {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px;
     text-align: center;
 }
 
 form {
-    margin: 20px auto;
-    width: 300px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 div {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 label {
-    display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 button {
     padding: 10px 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button.cancel {
+    background-color: #dc3545;
+}
+
+button.cancel:hover {
+    background-color: #c82333;
 }
