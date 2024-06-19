@@ -9,4 +9,35 @@ const AddProduct = () => {
         quantity: ''
     });
 
-   
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProduct({ ...product, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert(JSON.stringify(product, null, 2));
+        console.log(product);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Product Name</label>
+                <input type="text" name="name" value={product.name} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Description</label>
+                <input type="text" name="description" value={product.description} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Price</label>
+                <input type="number" name="price" value={product.price} onChange={handleChange} />
+            </div>
+          
+            
+        </form>
+    );
+};
+
+export default AddProduct;
