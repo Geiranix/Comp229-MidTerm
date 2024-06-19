@@ -1,62 +1,44 @@
-// src/components/SignUpUser.js
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const SignUpUser = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        if (data.password !== data.confirmPassword) {
-            alert("Passwords do not match!");
-        } else {
-            alert(JSON.stringify(data, null, 2));
-            console.log(data);
-        }
-    };
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    alert(JSON.stringify(data));
+  };
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label>First Name</label>
-                <input {...register("firstName", { required: true })} />
-                {errors.firstName && <span>This field is required</span>}
-            </div>
-            <div>
-                <label>Last Name</label>
-                <input {...register("lastName", { required: true })} />
-                {errors.lastName && <span>This field is required</span>}
-            </div>
-            <div>
-                <label>Username</label>
-                <input {...register("userName", { required: true })} />
-                {errors.userName && <span>This field is required</span>}
-            </div>
-            <div>
-                <label>Email</label>
-                <input {...register("email", { 
-                    required: true, 
-                    pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: "Invalid email address"
-                    } 
-                })} />
-                {errors.email && <span>{errors.email.message}</span>}
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" {...register("password", { required: true })} />
-                {errors.password && <span>This field is required</span>}
-            </div>
-            <div>
-                <label>Confirm Password</label>
-                <input type="password" {...register("confirmPassword", { required: true })} />
-                {errors.confirmPassword && <span>This field is required</span>}
-            </div>
-            <div className="button-group">
-                <button type="submit">Submit</button>
-                <button type="button" className="cancel">Cancel</button>
-            </div>
-        </form>
-    );
+  const password = watch('password');
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('firstName', { required: true })} placeholder="First Name" />
+      {errors.firstName && <span>This field is required</span>}
+
+      <input {...register('lastName', { required: true })} placeholder="Last Name" />
+      {errors.lastName && <span>This field is required</span>}
+
+      <input {...register('userName', { required: true })} placeholder="User Name" />
+      {errors.userName && <span>This field is required</span>}
+
+      <input {...register('email', {
+        required: true,
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      })} placeholder="Email" />
+      {errors.email && <span>Enter a valid email</span>}
+
+      <input {...register('password', { required: true })} type="password" placeholder="Password" />
+      {errors.password && <span>This field is required</span>}
+
+      <input {...register('confirmPassword', {
+        required: true,
+        validate: value => value === password || "Passwords do not match"
+      })} type="password" placeholder="Confirm Password" />
+      {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
 };
 
-export default SignUpUser;
+export default SignUpUser;
